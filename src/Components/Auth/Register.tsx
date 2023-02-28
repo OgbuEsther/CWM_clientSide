@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
 import { useMutation } from "@tanstack/react-query";
-import { createClient } from "../Api/Api";
+import { createClient, userData } from "../Api/Api";
 import Swal from "sweetalert2";
 
 import * as yup from "yup";
@@ -13,15 +13,12 @@ import { useForm } from "react-hook-form";
 import { UseAppDispatch } from "../Global/Store";
 
 import { useNavigate } from "react-router-dom";
+import { registerClient } from "../Global/ReduxState";
 
 const Register = () => {
   const dispatch = UseAppDispatch();
 
   const navigate = useNavigate();
-
-  /**phoneNumber: string;
-  clientType: string;
-  address: string; */
 
   const userSchema = yup
     .object({
@@ -29,7 +26,7 @@ const Register = () => {
       email: yup.string().required("please enter a email"),
       password: yup.string().required("please enter a password"),
       phoneNumber: yup.string().required("please enter a phone number"),
-      clientType: yup.string().required("please enter a client type"),
+      clientType: yup.boolean().required("please enter a client type"),
       address: yup.string().required("please enter a address"),
     })
     .required();
@@ -47,12 +44,17 @@ const Register = () => {
 
   const newClient = useMutation({
     mutationFn: createClient,
-    mutationKey: ["signup"],
+    mutationKey: ["registerAllClients"],
+
+    onSuccess: (data: any) => {
+      dispatch(registerClient(data.data));
+    },
   });
   const submit = handleSubmit((data) => {
     newClient.mutate(data);
+    console.log("this is yup data", data);
     reset();
-    navigate("/");
+    navigate("/home");
     Swal.fire({
       position: "center",
       icon: "success",
@@ -61,6 +63,12 @@ const Register = () => {
       timer: 2500,
     });
   });
+  // console.log("this is yup data 2", submit);
+
+  const submit2 = (e: any) => {
+    e.preventDefault();
+    console.log(`button dey work`);
+  };
 
   return (
     <div>

@@ -1,11 +1,11 @@
 import axios from "axios";
 
-interface userData {
+export interface userData {
   name: string;
   email: string;
   password: string;
   phoneNumber: string;
-  clientType: string;
+  clientType: boolean;
   address: string;
 }
 
