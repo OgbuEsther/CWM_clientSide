@@ -2,8 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
+import { useMutation } from "@tanstack/react-query";
+import { createClient } from "../Api/Api";
 
 const Register = () => {
+  const newClient = useMutation({
+    mutationFn: createClient,
+    mutationKey: ["signup"],
+  });
+
   return (
     <div>
       <Container>
