@@ -4,65 +4,109 @@ import { NavLink } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
 import { useMutation } from "@tanstack/react-query";
 import { createClient } from "../Api/Api";
+import Swal from "sweetalert2";
+
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
+import { UseAppDispatch } from "../Global/Store";
+
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const dispatch = UseAppDispatch();
+
+  const navigate = useNavigate();
+
+  /**phoneNumber: string;
+  clientType: string;
+  address: string; */
+
+  const userSchema = yup
+    .object({
+      name: yup.string().required("please enter a name"),
+      email: yup.string().required("please enter a email"),
+      password: yup.string().required("please enter a password"),
+      phoneNumber: yup.string().required("please enter a phone number"),
+      clientType: yup.string().required("please enter a client type"),
+      address: yup.string().required("please enter a address"),
+    })
+    .required();
+
+  type formData = yup.InferType<typeof userSchema>;
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    register,
+  } = useForm<formData>({
+    resolver: yupResolver(userSchema),
+  });
+
   const newClient = useMutation({
     mutationFn: createClient,
     mutationKey: ["signup"],
+  });
+  const submit = handleSubmit((data) => {
+    newClient.mutate(data);
+    reset();
+    navigate("/");
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "signed up successfully",
+      showConfirmButton: false,
+      timer: 2500,
+    });
   });
 
   return (
     <div>
       <Container>
         <Logo>Continental</Logo>
-        <Wrapper>
+        <Wrapper onSubmit={submit}>
           <AuthArea>
             <h2>Create account</h2>
             <input
-              //   value={name}
-              onChange={(e) => {
-                // setName(e.target.value);
-              }}
+              {...register("name")}
               type="text"
               required
               placeholder="FullName"
             />
+            <p>{errors?.name && errors?.name?.message} </p>
             <input
-              onChange={(e) => {
-                // setEmail(e.target.value);
-              }}
+              {...register("email")}
               type="text"
               required
-              placeholder="eMail"
+              placeholder="email"
             />
+            <p>{errors?.email && errors?.email?.message} </p>
             <input
-              onChange={(e) => {
-                // setEmail(e.target.value);
-              }}
+              {...register("phoneNumber")}
               type="number"
               required
               placeholder="Phone Number"
               maxLength={11}
             />
+            <p>{errors?.phoneNumber && errors?.phoneNumber?.message} </p>
             <input
-              onChange={(e) => {
-                // setEmail(e.target.value);
-              }}
+              {...register("address")}
               type="text"
               required
               placeholder="Address"
             />
+            <p>{errors?.address && errors?.address?.message} </p>
             <input
-              //   value={password}
-              onChange={(e) => {
-                // setPassword(e.target.value);
-              }}
+              {...register("password")}
               type="password"
               required
               placeholder="Enter Password"
               minLength={8}
               aria-hidden="true"
             />
+            <p>{errors?.password && errors?.password?.message} </p>
 
             <span>
               Already have an account? <Account to="/signin">Sign in!</Account>
@@ -150,6 +194,9 @@ const AuthArea = styled.div`
     font-size: 14px;
   }
 
+  p {
+    margin: 0;
+  }
   h2 {
     margin: 15px 0px;
     font-weight: 500;

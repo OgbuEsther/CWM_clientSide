@@ -14,21 +14,13 @@ const Signin = () => {
 
   const navigate = useNavigate();
 
-  const userSchema = yup
-    .object({
-      name: yup.string().required("please enter a name"),
-      email: yup.string().required("please enter a email"),
-      password: yup.string().required("please enter a password"),
-    })
-    .required();
-
-  const newClient = useMutation({
-    mutationFn: createClient,
-    mutationKey: ["signup"],
-    onSuccess: (data: any) => {
-      dispatchEvent(registerClient(data));
-    },
-  });
+  // const userSchema = yup
+  //   .object({
+  //     name: yup.string().required("please enter a name"),
+  //     email: yup.string().required("please enter a email"),
+  //     password: yup.string().required("please enter a password"),
+  //   })
+  //   .required();
 
   return (
     <div>
