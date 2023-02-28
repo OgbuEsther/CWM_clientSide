@@ -19,12 +19,14 @@ export const createClient = async ({
   clientType,
   address,
 }: userData) => {
-  await axios.post(`${endPoint}/signup`, {
-    name,
-    email,
-    password,
-    phoneNumber,
-    clientType,
-    address,
-  });
+  await axios
+    .post(`${endPoint}/signup`, {
+      name,
+      email,
+      password,
+      phoneNumber,
+      clientType,
+      address,
+    })
+    .then((res) => console.log(res));
 };

@@ -13,7 +13,7 @@ const Signin = () => {
             <h2>Sign In</h2>
             <input
               type="email"
-              placeholder="eMail"
+              placeholder="email"
               required
               onChange={(e) => {
                 // setEmail(e.target.value);
