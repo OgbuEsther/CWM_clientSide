@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux/es/exports";
+import { TypedUseSelectorHook } from "react-redux/es/types";
 import myReducer from "../Global/ReduxState";
 
 const store = configureStore({
@@ -11,3 +13,7 @@ const store = configureStore({
 //this will define your dispatch and selector functions
 
 export const UseAppDispatch: () => typeof store.dispatch = useDispatch;
+
+export const UseAppSelector: TypedUseSelectorHook<
+  ReturnType<typeof store.getState>
+> = useSelector;
