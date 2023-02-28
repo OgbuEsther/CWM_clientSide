@@ -1,9 +1,35 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
+import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { createClient } from "../Api/Api";
+import { registerClient } from "../Global/ReduxState";
+import { UseAppDispatch } from "../Global/Store";
+import * as yup from "yup";
 
 const Signin = () => {
+  const dispatch = UseAppDispatch();
+
+  const navigate = useNavigate();
+
+  const userSchema = yup
+    .object({
+      name: yup.string().required("please enter a name"),
+      email: yup.string().required("please enter a email"),
+      password: yup.string().required("please enter a password"),
+    })
+    .required();
+
+  const newClient = useMutation({
+    mutationFn: createClient,
+    mutationKey: ["signup"],
+    onSuccess: (data: any) => {
+      dispatchEvent(registerClient(data));
+    },
+  });
+
   return (
     <div>
       <Container>
