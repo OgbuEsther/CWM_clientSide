@@ -4,7 +4,7 @@ import { useSelector } from "react-redux/es/exports";
 import { TypedUseSelectorHook } from "react-redux/es/types";
 import myReducer from "../Global/ReduxState";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     myReducer,
   },
