@@ -27,7 +27,7 @@ const Signin = () => {
   const {
     handleSubmit,
     formState: { errors },
-    // reset,
+    reset,
     register,
   } = useForm<formData>({
     resolver: yupResolver(loginSchema),
@@ -45,7 +45,7 @@ const Signin = () => {
   const submit = handleSubmit((data) => {
     signin.mutate(data);
     console.log(`this is yup signin`, data);
-    // reset()
+    reset();
     Swal.fire({
       title: "registration",
       html: "redirecting to dashboard",
