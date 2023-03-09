@@ -6,7 +6,7 @@ interface userData {
   email: string;
   password: string;
   phoneNumber: string;
-  clientType: string;
+  //   clientType: boolean;
   address: string;
 }
 

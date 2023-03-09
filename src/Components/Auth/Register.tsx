@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
 import { useMutation } from "@tanstack/react-query";
-import { createClient, userData } from "../Api/Api";
+import { createClient } from "../Api/Api";
 import Swal from "sweetalert2";
 
 import * as yup from "yup";
@@ -26,7 +26,7 @@ const Register = () => {
       email: yup.string().required("please enter a email"),
       password: yup.string().required("please enter a password"),
       phoneNumber: yup.string().required("please enter a phone number"),
-      clientType: yup.boolean().required("please enter a client type"),
+      // clientType: yup.boolean().required("please enter a client type"),
       address: yup.string().required("please enter a address"),
     })
     .required();
@@ -63,12 +63,6 @@ const Register = () => {
       timer: 2500,
     });
   });
-  // console.log("this is yup data 2", submit);
-
-  const submit2 = (e: any) => {
-    e.preventDefault();
-    console.log(`button dey work`);
-  };
 
   return (
     <div>
@@ -234,6 +228,7 @@ const Wrapper = styled.form`
   min-width: 320px;
   /* min-height: 330px; */
   background-color: #f8f9f8;
+  border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.156) 0px 2px 8px 0px;
 
   @media screen and (max-width: 768px) {

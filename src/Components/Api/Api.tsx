@@ -5,7 +5,7 @@ export interface userData {
   email: string;
   password: string;
   phoneNumber: string;
-  clientType: boolean;
+  //   clientType: boolean;
   address: string;
 }
 
@@ -16,7 +16,7 @@ export const createClient = async ({
   email,
   password,
   phoneNumber,
-  clientType,
+  //   clientType,
   address,
 }: userData) => {
   await axios
@@ -25,7 +25,7 @@ export const createClient = async ({
       email,
       password,
       phoneNumber,
-      clientType,
+      //   clientType,
       address,
     })
     .then((res) => console.log(res));
