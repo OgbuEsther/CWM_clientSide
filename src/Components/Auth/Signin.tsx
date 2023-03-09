@@ -27,7 +27,7 @@ const Signin = () => {
   const {
     handleSubmit,
     formState: { errors },
-    reset,
+    // reset,
     register,
   } = useForm<formData>({
     resolver: yupResolver(loginSchema),
@@ -48,7 +48,7 @@ const Signin = () => {
     // reset()
     Swal.fire({
       title: "registration",
-      html: "redirecting to login",
+      html: "redirecting to dashboard",
       timer: 2000,
       timerProgressBar: true,
 
@@ -62,7 +62,7 @@ const Signin = () => {
     <div>
       <Container>
         <Logo>Continental</Logo>
-        <Wrapper>
+        <Wrapper onSubmit={submit}>
           <AuthArea>
             <h2>Sign In</h2>
             <input
