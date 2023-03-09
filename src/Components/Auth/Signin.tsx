@@ -9,10 +9,11 @@ import * as yup from "yup";
 import { UseAppDispatch } from "../Global/Store";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Swal from "sweetalert2";
 
 const Signin = () => {
   const dispatch = UseAppDispatch();
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   const loginSchema = yup
     .object({
@@ -39,6 +40,22 @@ const Signin = () => {
     onSuccess: (data: any) => {
       dispatch(loginClients(data.data));
     },
+  });
+
+  const submit = handleSubmit((data) => {
+    signin.mutate(data);
+    console.log(`this is yup signin`, data);
+    // reset()
+    Swal.fire({
+      title: "registration",
+      html: "redirecting to login",
+      timer: 2000,
+      timerProgressBar: true,
+
+      willClose: () => {
+        navigate("/");
+      },
+    });
   });
 
   return (
@@ -72,7 +89,7 @@ const Signin = () => {
             </Button>
           </Buttons>
         </Wrapper>
-        <Footer>Developed by Isaac Etor. © {new Date().getFullYear()}</Footer>
+        <Footer>Developed by I.E.F . © {new Date().getFullYear()}</Footer>
       </Container>
     </div>
   );

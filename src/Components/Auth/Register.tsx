@@ -30,7 +30,6 @@ const Register = () => {
       address: yup.string().required("please enter a address"),
     })
     .required();
-
   type formData = yup.InferType<typeof userSchema>;
 
   const {

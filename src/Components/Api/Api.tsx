@@ -39,5 +39,6 @@ export const createClient = async ({
 export const loginClient = async ({ email, password }: login) => {
   return await axios
     .post(`${endPoint}/login`, { email, password })
-    .then((res) => console.log("this is res", res));
+    .then((res) => console.log("this is res", res))
+    .catch((err) => console.log(`this is api consumption error`, err));
 };
