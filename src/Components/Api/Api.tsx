@@ -9,6 +9,11 @@ export interface userData {
   address: string;
 }
 
+export interface login {
+  email: string;
+  password: string;
+}
+
 const endPoint = "http://localhost:8000/api/clientauth";
 
 export const createClient = async ({
@@ -29,4 +34,10 @@ export const createClient = async ({
       address,
     })
     .then((res) => console.log(res));
+};
+
+export const loginClient = async ({ email, password }: login) => {
+  return await axios
+    .post(`${endPoint}`)
+    .then((res) => console.log("this is res", res));
 };
