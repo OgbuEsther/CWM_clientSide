@@ -48,10 +48,20 @@ const Signin = () => {
         <Wrapper>
           <AuthArea>
             <h2>Sign In</h2>
-            <input type="email" placeholder="email" required />
-            <p></p>
-            <input type="password" placeholder="password" required />
-            <p></p>
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="email"
+              required
+            />
+            <p>{errors?.email && errors?.email.message} </p>
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="password"
+              required
+            />
+            <p>{errors?.password && errors?.password.message} </p>
             <span>
               No account? <Account to="/register">Create one!</Account>
             </span>
