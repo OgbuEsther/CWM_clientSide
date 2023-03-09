@@ -7,6 +7,8 @@ import { loginClient } from "../Api/Api";
 import { loginClients } from "../Global/ReduxState";
 import * as yup from "yup";
 import { UseAppDispatch } from "../Global/Store";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const Signin = () => {
   const dispatch = UseAppDispatch();
@@ -18,9 +20,25 @@ const Signin = () => {
       password: yup.string().required("please enter your password"),
     })
     .required();
+
+  type formData = yup.InferType<typeof loginSchema>;
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    register,
+  } = useForm<formData>({
+    resolver: yupResolver(loginSchema),
+  });
+
   const signin = useMutation({
     mutationFn: loginClient,
     mutationKey: ["loginAllClients"],
+
+    onSuccess: (data: any) => {
+      dispatch(loginClients(data.data));
+    },
   });
 
   return (
