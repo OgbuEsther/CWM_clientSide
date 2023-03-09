@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
+import { useMutation } from "@tanstack/react-query";
+import { loginClient } from "../Api/Api";
+import { loginClients } from "../Global/ReduxState";
+import * as yup from "yup";
 
 const Signin = () => {
   return (
@@ -11,23 +15,10 @@ const Signin = () => {
         <Wrapper>
           <AuthArea>
             <h2>Sign In</h2>
-            <input
-              type="email"
-              placeholder="email"
-              required
-              onChange={(e) => {
-                // setEmail(e.target.value);
-              }}
-            />
-            <input
-              type="password"
-              placeholder="password"
-              required
-              minLength={8}
-              onChange={(e) => {
-                // setPassword(e.target.value);
-              }}
-            />
+            <input type="email" placeholder="email" required />
+            <p></p>
+            <input type="password" placeholder="password" required />
+            <p></p>
             <span>
               No account? <Account to="/register">Create one!</Account>
             </span>
@@ -98,6 +89,10 @@ const AuthArea = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  p {
+    margin: 0;
+  }
 
   input {
     height: 40px;
