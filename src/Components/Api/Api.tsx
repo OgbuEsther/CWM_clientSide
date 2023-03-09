@@ -36,8 +36,14 @@ export const createClient = async ({
     .then((res) => console.log(res));
 };
 
+// export const loginClient = async ({ email, password }: login) => {
+//   return await axios
+//     .post(`${endPoint}/login`, { email, password })
+//     .then((res) => console.log("this is res", res));
+// };
+
 export const loginClient = async ({ email, password }: login) => {
   return await axios
-    .post(`${endPoint}/login`)
+    .post(`${endPoint}/login`, { email, password })
     .then((res) => console.log("this is res", res));
 };
