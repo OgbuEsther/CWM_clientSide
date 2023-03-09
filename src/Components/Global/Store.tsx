@@ -34,12 +34,6 @@ export const Store = configureStore({
     }),
 });
 
-// export const store = configureStore({
-//   reducer: {
-//     myReducer,
-//   },
-// });
-
 //this will define your dispatch and selector functions
 
 export const UseAppDispatch: () => typeof Store.dispatch = useDispatch;

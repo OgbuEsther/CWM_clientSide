@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { QueryClient } from "@tanstack/react-query";
 import { Provider } from "react-redux/es/exports";
-import { store } from "./Components/Global/Store";
+import { Store } from "./Components/Global/Store";
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={Store}>
         <QueryClientProvider client={queryClient}>
           <App />
           <ReactQueryDevtools />
