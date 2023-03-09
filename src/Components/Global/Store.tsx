@@ -16,16 +16,34 @@ import {
   REHYDRATE,
 } from "redux-persist";
 
-export const store = configureStore({
-  reducer: {
-    myReducer,
-  },
+const persistConfig = {
+  key: "CWM",
+  version: 1,
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, myReducer);
+
+export const Store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+// export const store = configureStore({
+//   reducer: {
+//     myReducer,
+//   },
+// });
 
 //this will define your dispatch and selector functions
 
-export const UseAppDispatch: () => typeof store.dispatch = useDispatch;
+export const UseAppDispatch: () => typeof Store.dispatch = useDispatch;
 
 export const UseAppSelector: TypedUseSelectorHook<
-  ReturnType<typeof store.getState>
+  ReturnType<typeof Store.getState>
 > = useSelector;
