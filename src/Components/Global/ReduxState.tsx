@@ -10,8 +10,14 @@ interface userData {
   address: string;
 }
 
+interface loginClient {
+  email: string;
+  password: string;
+}
+
 const initialState = {
   Client: {} as userData | null,
+  login: {} as loginClient | null,
 };
 
 const ReduxState = createSlice({
