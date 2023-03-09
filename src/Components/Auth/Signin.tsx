@@ -2,12 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
-import { useQuery } from "@tanstack/react-query";
-import { useMutation } from "@tanstack/react-query";
-import { createClient } from "../Api/Api";
-import { registerClient } from "../Global/ReduxState";
-import { UseAppDispatch } from "../Global/Store";
-import * as yup from "yup";
 
 const Signin = () => {
   return (
