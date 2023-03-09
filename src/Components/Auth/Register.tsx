@@ -54,13 +54,15 @@ const Register = () => {
     newClient.mutate(data);
     console.log("this is yup data", data);
     reset();
-    navigate("/home");
     Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "signed up successfully",
-      showConfirmButton: false,
-      timer: 2500,
+      title: "registration",
+      html: "redirecting to login",
+      timer: 2000,
+      timerProgressBar: true,
+
+      willClose: () => {
+        navigate("/signin");
+      },
     });
   });
 
