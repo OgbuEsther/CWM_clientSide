@@ -27,9 +27,12 @@ const ReduxState = createSlice({
     registerClient: (state, { payload }: PayloadAction<userData>) => {
       state.Client = payload;
     },
+    loginClients: (state, { payload }: PayloadAction<loginClient>) => {
+      state.login = payload;
+    },
   },
 });
 
-export const { registerClient } = ReduxState.actions;
+export const { registerClient, loginClients } = ReduxState.actions;
 
 export default ReduxState.reducer;
