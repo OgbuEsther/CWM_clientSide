@@ -6,8 +6,23 @@ import { useMutation } from "@tanstack/react-query";
 import { loginClient } from "../Api/Api";
 import { loginClients } from "../Global/ReduxState";
 import * as yup from "yup";
+import { UseAppDispatch } from "../Global/Store";
 
 const Signin = () => {
+  const dispatch = UseAppDispatch();
+  const naviagate = useNavigate();
+
+  const loginSchema = yup
+    .object({
+      email: yup.string().required("please enter a valid email address"),
+      password: yup.string().required("please enter your password"),
+    })
+    .required();
+  const signin = useMutation({
+    mutationFn: loginClient,
+    mutationKey: ["loginAllClients"],
+  });
+
   return (
     <div>
       <Container>
@@ -137,6 +152,7 @@ const Wrapper = styled.form`
   width: calc(100% - 40px);
   padding: 44px;
   min-width: 320px;
+  border-radius: 5px;
   /* min-height: 330px; */
   background-color: #f8f9f8;
   box-shadow: rgba(99, 99, 99, 0.156) 0px 2px 8px 0px;
