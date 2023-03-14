@@ -17,7 +17,7 @@ import {
 } from "redux-persist";
 
 const persistConfig = {
-  key: "CWM",
+  key: "eWaste",
   version: 1,
   storage,
 };

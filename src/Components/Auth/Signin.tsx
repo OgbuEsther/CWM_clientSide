@@ -42,9 +42,9 @@ const Signin = () => {
     //   client.invalidateQueries(["socialMediaPost"]);
     // },
 
-    // onSuccess: (data: any) => {
-    //   console.log("this is on success", dispatch(loginClients(data.data.data)));
-    // },
+    onSuccess: (myData) => {
+      console.log("this is on success", dispatch(loginClients(myData.data)));
+    },
   });
 
   const submit = handleSubmit((data) => {

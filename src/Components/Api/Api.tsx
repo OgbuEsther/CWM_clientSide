@@ -21,7 +21,7 @@ export const createClient = async ({
   email,
   password,
   phoneNumber,
-  //   clientType,
+
   address,
 }: userData) => {
   await axios
@@ -30,15 +30,19 @@ export const createClient = async ({
       email,
       password,
       phoneNumber,
-      //   clientType,
+
       address,
     })
-    .then((res) => console.log(res));
+    .then((res) => {
+      return res.data;
+    });
 };
 
 export const loginClient = async ({ email, password }: login) => {
   return await axios
     .post(`${endPoint}/login`, { email, password })
-    .then((res) => console.log("this is res", res))
-    .catch((err) => console.log(`this is api consumption error`, err));
+    .then((res) => {
+      return res.data;
+    });
+  // .catch((err) => console.log(`this is api consumption error`, err));
 };
