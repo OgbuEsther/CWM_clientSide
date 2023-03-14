@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import bg from "../../Assets/AnimatedShape.svg";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginClient } from "../Api/Api";
 import { loginClients } from "../Global/ReduxState";
 import * as yup from "yup";
@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 
 const Signin = () => {
   const dispatch = UseAppDispatch();
+  const client = useQueryClient();
   const navigate = useNavigate();
 
   const loginSchema = yup
@@ -37,9 +38,13 @@ const Signin = () => {
     mutationFn: loginClient,
     mutationKey: ["loginAllClients"],
 
-    onSuccess: (data: any) => {
-      dispatch(loginClients(data.data));
-    },
+    // onSuccess: (data) => {
+    //   client.invalidateQueries(["socialMediaPost"]);
+    // },
+
+    // onSuccess: (data: any) => {
+    //   console.log("this is on success", dispatch(loginClients(data.data.data)));
+    // },
   });
 
   const submit = handleSubmit((data) => {
@@ -47,7 +52,7 @@ const Signin = () => {
     console.log(`this is yup signin`, data);
     reset();
     Swal.fire({
-      title: "registration",
+      title: "login",
       html: "redirecting to dashboard",
       timer: 2000,
       timerProgressBar: true,

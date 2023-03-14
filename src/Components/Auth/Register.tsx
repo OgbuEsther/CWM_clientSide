@@ -46,7 +46,7 @@ const Register = () => {
     mutationKey: ["registerAllClients"],
 
     onSuccess: (data: any) => {
-      dispatch(registerClient(data.data));
+      dispatch(registerClient(data.data.data));
     },
   });
   const submit = handleSubmit((data) => {
