@@ -5,7 +5,6 @@ export interface userData {
   email: string;
   password: string;
   phoneNumber: string;
-  //   clientType: boolean;
   address: string;
 }
 
